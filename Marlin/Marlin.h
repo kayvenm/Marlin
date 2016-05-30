@@ -269,6 +269,13 @@ extern uint8_t active_extruder;
 extern void digipot_i2c_set_current( int channel, float current );
 extern void digipot_i2c_init();
 #endif
+#ifdef DAC_I2C
+extern int dac_init();
+extern void dac_current_percent(uint8_t channel, float val);
+extern void dac_current_raw(uint8_t channel, uint16_t val);
+extern void dac_print_values();
+extern void dac_commit_eeprom();
+#endif
 
 #endif
 

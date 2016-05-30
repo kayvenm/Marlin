@@ -282,6 +282,14 @@
 // actual motor currents in Amps, need as many here as DIGIPOT_I2C_NUM_CHANNELS
 #define DIGIPOT_I2C_MOTOR_CURRENTS {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0}
 
+// uncomment to enable an I2C based DAC like on the Printrbot board rev F
+#define DAC_I2C
+#define DAC_I2C_STEPPER_ADDRESS	0
+#define DAC_I2C_STEPPER_ORDER 	{3,2,1,0}
+#define DAC_I2C_STEPPER_MAX 	3520
+#define DAC_I2C_STEPPER_VREF 	1 //internal Vref, gain 1x = 2.048V
+#define DAC_I2C_STEPPER_GAIN	0
+
 //===========================================================================
 //=============================Additional Features===========================
 //===========================================================================

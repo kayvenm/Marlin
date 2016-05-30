@@ -151,6 +151,9 @@ MCU              ?= at90usb1286
 else ifeq  ($(HARDWARE_MOTHERBOARD),84)
 HARDWARE_VARIANT ?= Teensy
 MCU              ?= at90usb1286
+else ifeq  ($(HARDWARE_MOTHERBOARD),85)
+HARDWARE_VARIANT ?= Teensy
+MCU              ?= at90usb1286
 
 #Gen3+
 else ifeq  ($(HARDWARE_MOTHERBOARD),9)
@@ -205,7 +208,7 @@ ifeq ($(HARDWARE_VARIANT), arduino)
 HARDWARE_DIR = $(ARDUINO_INSTALL_DIR)/hardware
 else
 ifeq ($(shell [ $(ARDUINO_VERSION) -ge 100 ] && echo true), true)
-HARDWARE_DIR = ../ArduinoAddons/Arduino_1.x.x
+HARDWARE_DIR = ../ArduinoAddons/Arduino_1.0.x
 else
 HARDWARE_DIR = ../ArduinoAddons/Arduino_0.xx
 endif
@@ -259,14 +262,16 @@ SRC = wiring.c \
 	wiring_shift.c WInterrupts.c
 ifeq ($(HARDWARE_VARIANT), Teensy)
 SRC = wiring.c
-VPATH += $(ARDUINO_INSTALL_DIR)/hardware/teensy/cores/teensy
+VPATH += $(ARDUINO_INSTALL_DIR)/hardware/teensy/avr/cores/teensy
+VPATH += $(ARDUINO_INSTALL_DIR)/hardware/teensy/avr/libraries/Wire
+VPATH += $(ARDUINO_INSTALL_DIR)/hardware/teensy/avr/libraries/Wire/utility
 endif
 CXXSRC = WMath.cpp WString.cpp Print.cpp Marlin_main.cpp	\
 	MarlinSerial.cpp Sd2Card.cpp SdBaseFile.cpp SdFatUtil.cpp	\
 	SdFile.cpp SdVolume.cpp motion_control.cpp planner.cpp		\
 	stepper.cpp temperature.cpp cardreader.cpp ConfigurationStore.cpp \
 	watchdog.cpp SPI.cpp Servo.cpp Tone.cpp ultralcd.cpp digipot_mcp4451.cpp \
-	vector_3.cpp qr_solve.cpp
+	vector_3.cpp qr_solve.cpp dac_mcp4728.cpp mcp4728.cpp
 ifeq ($(LIQUID_TWI2), 0)
 CXXSRC += LiquidCrystal.cpp
 else
